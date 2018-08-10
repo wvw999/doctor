@@ -10,7 +10,7 @@ function phoneFix(number) {
   return (!updatedNumber) ? null : "(" + updatedNumber[1] + ") " + updatedNumber[2] + "-" + updatedNumber[3];
 }
 
-function detailsProcessor(body) {
+function detailsProcessor(styling,body) {
   $("#outputRow").html("");
   if (body.data[0] == undefined) {
     $("#outputRow").append(`<div class="container listing"><h4><i>Oops! Your search did not return any results.</i></h4></div>`);
@@ -28,7 +28,7 @@ function detailsProcessor(body) {
       } else {
         phone = phoneFix(body.data[i].practices[0].phones[0].number);
       }
-      $("#outputRow").append(`<div class="container listing"><img class="right" src="${body.data[i].profile.image_url}">  ${body.data[i].practices[0].name}<br>${body.data[i].practices[0].visit_address.street}, ${body.data[i].practices[0].visit_address.city}, ${body.data[i].practices[0].visit_address.state},  ${body.data[i].practices[0].visit_address.zip} <br> ${phone} <br>accepts new patients: ${body.data[i].practices[0].accepts_new_patients}<br>${websiteData}</div><br>`);
+      $("#outputRow").append(`<div class="container listing ${styling}"><img class="right" src="${body.data[i].profile.image_url}">  ${body.data[i].practices[0].name}<br>${body.data[i].practices[0].visit_address.street}, ${body.data[i].practices[0].visit_address.city}, ${body.data[i].practices[0].visit_address.state},  ${body.data[i].practices[0].visit_address.zip} <br> ${phone} <br>accepts new patients: ${body.data[i].practices[0].accepts_new_patients}<br>${websiteData}</div><br>`);
     }
   }
 }
@@ -46,9 +46,9 @@ $(document).ready(function() {
     promiseOne.then(function(response) {
       let body = JSON.parse(response);
       $("#outputRow").append(`<h3>Doctor Search Results</h3>`);
-      detailsProcessor(body);
+      detailsProcessor(last_name,body);
     }, (error) => {
-      $('.showErrors').text(`There was an error processing your request: ${error.message}`);
+      $('.errors').text(`There was an error processing your request: ${error.message}`);
     });
   });
 
@@ -60,9 +60,9 @@ $(document).ready(function() {
     promiseTwo.then(function(response) {
       let body = JSON.parse(response);
       $("#outputRow").append(`<h3>Doctors who can treat your issue:</h3>`);
-      detailsProcessor(body);
+      detailsProcessor(query,body);
     }, (error) => {
-      $('.showErrors').text(`There was an error processing your request: ${error.message}`);
+      $('.errors').text(`There was an error processing your request: ${error.message}`);
     });
   });
 

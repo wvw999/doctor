@@ -1,5 +1,5 @@
 body {
-  background-color: pink;
+  background-color: #ffe6e6;
 }
 
 #doctorName {
@@ -22,8 +22,21 @@ input {
 .listing {
   border: 1px;
   margin: 5px;
+  padding: 7px;
 }
 
 img {
   float: right;
+}
+
+h1 {
+  margin: 30px
+}
+
+.last_name {
+  background-color: #e6ffe6;
+}
+
+.query {
+  background-color: #eee6ff;
 }
