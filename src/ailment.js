@@ -1,0 +1,9 @@
+class Ailment {
+
+
+
+
+
+}
+
+export {Ailment}

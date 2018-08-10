@@ -1,0 +1,20 @@
+body {
+  background-color: pink;
+}
+
+#doctorName {
+  min-height: 75px;
+}
+
+#ailmentName {
+  min-height: 75px;
+}
+
+input {
+  min-width: 250px;
+}
+
+#outputRow {
+  overflow: auto;
+  max-height: 500px;
+}
